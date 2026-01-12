@@ -9,7 +9,9 @@
       "Bash(gh repo edit:*)",
       "Bash(gh api:*)",
       "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd app icon\n\nBlue door with checkmark - represents checking before exiting\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(xcrun simctl:*)",
+      "Bash(# Click \"\"Use Current Location\"\" button\nosascript <<'EOF'\ntell application \"Simulator\" to activate\ndelay 0.3\ntell application \"System Events\"\n    tell process \"Simulator\"\n        set frontmost to true\n        delay 0.2\n        set winPos to position of window 1\n        set winSize to size of window 1\n        set clickX to \\(item 1 of winPos\\) + \\(\\(item 1 of winSize\\) / 2\\)\n        -- This button is higher up - around middle of screen\n        set clickY to \\(item 2 of winPos\\) + \\(\\(item 2 of winSize\\) / 2\\) + 30\n        click at {clickX, clickY}\n    end tell\nend tell\nEOF\n\nsleep 1.5\n\n# Now click Continue \\(green button that appears after location is set\\)\nosascript <<'EOF'\ntell application \"Simulator\" to activate\ndelay 0.3\ntell application \"System Events\"\n    tell process \"Simulator\"\n        set frontmost to true\n        delay 0.2\n        set winPos to position of window 1\n        set winSize to size of window 1\n        set clickX to \\(item 1 of winPos\\) + \\(\\(item 1 of winSize\\) / 2\\)\n        set clickY to \\(item 2 of winPos\\) + \\(item 2 of winSize\\) - 150\n        click at {clickX, clickY}\n    end tell\nend tell\nEOF\n\nsleep 1\nxcrun simctl io booted screenshot ~/Desktop/ExitCheck-Screenshots/06-choose-template.png\necho \"\"Screenshot 6 captured - Choose Template\"\")"
     ]
   }
 }
