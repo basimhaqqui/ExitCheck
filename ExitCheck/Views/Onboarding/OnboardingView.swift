@@ -227,7 +227,7 @@ struct LocationPermissionPage: View {
                         }
                     }
                 } else {
-                    OnboardingButton(title: "Allow Location Access") {
+                    OnboardingButton(title: "Continue") {
                         if locationManager.authorizationStatus == .notDetermined {
                             locationManager.requestAlwaysAuthorization()
                         }
